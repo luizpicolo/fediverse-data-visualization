@@ -1,0 +1,28 @@
+https://the-federation.info/graphql#
+
+Platform($name: String!) { 
+  platforms(name: $name) { 
+    name code displayName description tagline website icon __typename 
+  } 
+  nodes(platform: $name) { 
+    id name version openSignups host 
+    platform { 
+      name icon __typename 
+    } 
+    countryCode countryFlag countryName 
+    services { 
+      name __typename 
+    } 
+    __typename 
+  } 
+  statsGlobalToday(platform: $name) { 
+    usersTotal usersHalfYear usersMonthly localPosts localComments __typename 
+  }
+  statsNodes(platform: $name) { 
+    node { id __typename } 
+    usersTotal usersHalfYear usersMonthly localPosts localComments __typename 
+    } 
+  }
+
+operationName: Platform
+variables: {"name":"mastodon"}
