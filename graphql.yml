@@ -1,0 +1,28 @@
+https://the-federation.info/graphql#
+
+query {
+  nodes(
+    platform: ""
+  ) 
+  {
+    id
+    name
+    countryCode
+    countryName
+    host
+    platform {
+      name
+    }
+  }
+  statsNodes(
+    platform: ""
+  )
+	{
+    node {
+      id
+    }
+    usersTotal 
+  }
+}
+
+
