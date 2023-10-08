@@ -1,4 +1,4 @@
-import Import from "./import/Import.js";
+import Import from "./import/index.js";
 
 // Primeiro passo do Pipeline
 const _import = new Import();
