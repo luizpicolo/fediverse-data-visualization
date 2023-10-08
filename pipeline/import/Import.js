@@ -1,3 +1,5 @@
+import './prepare.js'; // Prepara os arquivos para a importação
+
 import chalk from 'chalk';
 import { isValidJSON } from './helpers/Validation.js';
 import { promises, readFileSync, writeFileSync } from 'fs';
