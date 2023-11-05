@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import MergeJsonTheFederation from "./helpers/MergeJsonTheFederation.js";
 import FileCopy from "./helpers/FileCopy.js";
+import CSVFileHandler from "./helpers/CSVFileHandler.js";
 
 console.log(chalk.green("Preparing files for import..."))
 
@@ -15,5 +16,11 @@ const filesToCopy = [
   '../../sources/instances_social.json'
 ];
 new FileCopy('./import/input').copyFiles(filesToCopy);
+
+// Converter os arquivos CVS para JSOn
+const csvFilePath = './sources/fedilist.csv';
+const csvFileHandler = new CSVFileHandler();
+csvFileHandler.input(csvFilePath);
+csvFileHandler.output('./import/input/fedilist.json')
 
 console.log(chalk.green("Preparation finished"))
