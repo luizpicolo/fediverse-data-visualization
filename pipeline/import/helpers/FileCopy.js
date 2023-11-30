@@ -18,8 +18,8 @@ class FileCopy {
       const destFilePath = join(this.#destinationDir, basename(fileName));
 
       try {
+        console.log(chalk.green(` --> Copying a file ${fileName}!`));
         copyFileSync(sourceFile, destFilePath);
-        console.log(chalk.green(`File ${fileName} copied successfully!`));
       } catch (err) {
         console.error(chalk.red(`Error copying ${fileName}: ${err}`));
       }

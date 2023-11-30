@@ -3,7 +3,7 @@ import MergeJsonTheFederation from "./helpers/MergeJsonTheFederation.js";
 import FileCopy from "./helpers/FileCopy.js";
 import CSVFileHandler from "./helpers/CSVFileHandler.js";
 
-console.log(chalk.green("Preparing files for import..."))
+console.log(chalk.blue("Preparing files for import..."))
 
 // Merge dos arquivos do the Federation
 const mergeFile = new MergeJsonTheFederation();
@@ -23,4 +23,4 @@ const csvFileHandler = new CSVFileHandler();
 csvFileHandler.input(csvFilePath);
 csvFileHandler.output('./import/input/fedilist.json')
 
-console.log(chalk.green("Preparation finished"))
+console.log(chalk.blue("Preparation finished"))

@@ -1,21 +1,20 @@
 import chalk from 'chalk';
-import { isValidJSON } from './Validation.js';
+import { isValidJSON } from '../../helpers/Validation.js';
 import { readFileSync, writeFileSync } from 'fs';
 
 class CSVFileHandler {
   #csvFilePath;
 
   input(csvFilePath) {
-    console.log(chalk.green('Input CSV files'));
+    console.log(chalk.green(' --> Input CSV files'));
     this.#csvFilePath = csvFilePath;
   }
 
   output(filePath) {
     try {
-      console.log(chalk.green('Processing CSV files'));
+      console.log(chalk.green(' --> Processing CSV files'));
       let content = this.#readCSVFile();
       this.#createFile(filePath, JSON.stringify(content));
-      console.log(chalk.green('File processed successfully'));
     } catch (error) {
       throw new Error('An error occurred during processing:', error);
     }
@@ -49,8 +48,8 @@ class CSVFileHandler {
   #createFile(filePath, content) {
     try {
       if (isValidJSON(content)) {
+        console.log(chalk.green(` --> The file ${filePath} has been created successfully.`));
         writeFileSync(filePath, content);
-        console.log(chalk.green(`The file ${filePath} has been created successfully.`));
       }
     } catch (error) {
       console.error('Error while creating the file:', error);
