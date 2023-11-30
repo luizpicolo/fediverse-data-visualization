@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { isValidJSON } from './Validation.js';
+import { isValidJSON } from '../../helpers/Validation.js';
 import fs from 'fs';
 
 class MergeJsonTheFederation {
@@ -14,18 +14,17 @@ class MergeJsonTheFederation {
   }
 
   input(file1Path, file2Path) {
-    console.log(chalk.green('Input files'));
+    console.log(chalk.green(' --> Input Json files '));
     this.#file1Path = file1Path;
     this.#file2Path = file2Path;
   }
 
   output(path) {
     try {
-      console.log(chalk.green('Processing files'));
+      console.log(chalk.green(' --> Processing files'));
       this.#readAndMapFile();
       this.#combineData();
       this.#writeCombinedDataToFile(path);
-      console.log(chalk.green('File processed successfully'));
     } catch (error) {
       throw new Error('An error occurred during processing:', error);
     }
