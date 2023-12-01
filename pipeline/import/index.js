@@ -2,7 +2,7 @@ import './prepare.js'; // Prepara os arquivos para a importação
 
 import chalk from 'chalk';
 import { isValidJSON } from '../helpers/Validation.js';
-import { promises, readFileSync, writeFileSync } from 'fs';
+import { promises, readFileSync, writeFileSync, readdirSync } from 'fs';
 import { extname, join, basename } from 'path';
 
 class Import {
@@ -15,20 +15,15 @@ class Import {
   }
 
   output(path) {
-    this.readJSONFilesInDirectory()
-      .then(() => {
-        this.#writeJSONFile(path);
-        console.log(chalk.blue('Import Files Finished'));
-      })
-      .catch((error) => {
-        throw new Error(`Error output: ${error.message}`);
-      });
+    this.#readJSONFilesInDirectory();
+    this.#writeJSONFile(path);
+    console.log(chalk.blue('Import Files Finished'));
   }
 
-  async readJSONFilesInDirectory() {
+  #readJSONFilesInDirectory() {
     console.log(chalk.green(' --> Reading directory to JSON files'));
     try {
-      const files = await promises.readdir(this.#directoryPath);
+      const files = readdirSync(this.#directoryPath);
       const jsonFiles = files.filter((file) => extname(file).toLowerCase() === '.json');
 
       for (const jsonFile of jsonFiles) {

@@ -11,6 +11,6 @@ const _filter = new Filter();
 _filter.input('./import/output/combined.json')
 _filter.removeAttributes = [
   "countryName", "connections", "statuses", "countryCode", "platform", "checked_at", "thumbnail_proxy",
-  "open_registration", "description", "banner_url", "monthly_active_users", "thumbnail", "info"
+  "open_registration", "description", "banner_url", "monthly_active_users", "thumbnail", "info", "https_score", "admin"
 ];
 _filter.output('./filter/output');

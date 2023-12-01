@@ -20,7 +20,7 @@ class Filter {
     if (isValidJSON(filteredJson)) {
       this.#writeJSONFile(path, filteredJson);
       console.log(chalk.blue('Filter Files Finished'));
-    }
+    } 
   }
 
   #readJSONFile(filePath) {
