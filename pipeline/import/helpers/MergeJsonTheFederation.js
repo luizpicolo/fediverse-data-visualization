@@ -26,6 +26,7 @@ class MergeJsonTheFederation {
       this.#combineData();
       this.#writeCombinedDataToFile(path);
     } catch (error) {
+      console.log(error)
       throw new Error('An error occurred during processing:', error);
     }
   }
