@@ -65,12 +65,16 @@ class Mapper {
 
           if (allAttributesPresent) {
             nodes.forEach(node => {
+              // name e users
+              // hostname, user_count
+              // domain, stats -> { user_count }
+              // name, host, usersTotal
 
               // Mapping to BubbleChart
-              if (chart.toLowerCase() == 'bubblechart'){
+              if (chart.toLowerCase() == 'bubblechart' && node[`${attributes[1]}`] != null){
                 mappedData.push({
-                  "id": `flare.mastodon.${formatDomain(node.name)}`,
-                  "value": node.users
+                  "id": `flare.mastodon.${formatDomain(node[`${attributes[0]}`])}`,
+                  "value": node[`${attributes[1]}`].user_count || node[`${attributes[1]}`]
                 });
               }
             });
