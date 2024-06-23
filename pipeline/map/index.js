@@ -53,6 +53,21 @@ class Mapper {
     this.#attributesToMap = attributes;
   }
 
+  #removeDuplicates(json) {
+    const map = new Map();
+    json.forEach(item => {
+        const existingItem = map.get(item.id);
+        if (!existingItem || item.value > existingItem.value) {
+            map.set(item.id, item);
+        }
+    });
+
+    // Pedido
+    map.delete("flare.mastodon.sleepingTown");
+
+    return Array.from(map.values());
+  }
+
   #mapAttributes(attributesToMap, chart) {
     try {
       const mappedData = [];
@@ -65,16 +80,11 @@ class Mapper {
 
           if (allAttributesPresent) {
             nodes.forEach(node => {
-              // name e users
-              // hostname, user_count
-              // domain, stats -> { user_count }
-              // name, host, usersTotal
-
               // Mapping to BubbleChart
-              if (chart.toLowerCase() == 'bubblechart' && node[`${attributes[1]}`] != null){
+              if (chart.toLowerCase() == 'bubblechart'){
                 mappedData.push({
                   "id": `flare.mastodon.${formatDomain(node[`${attributes[0]}`])}`,
-                  "value": node[`${attributes[1]}`].user_count || node[`${attributes[1]}`]
+                  "value": node[`${attributes[1]}`] || 1
                 });
               }
             });
@@ -82,11 +92,24 @@ class Mapper {
         });
       });
 
-      return mappedData;
+      //return this.#filterElementByKeyword(this.#removeDuplicates(mappedData));
+      return this.#removeDuplicates(mappedData)
     } catch (error) {
       console.error("Error mapping attributes:", error.message);
     }
   }
+
+  // #containsKeyword(str){
+  //   const keywords = ['pleroma', 'diaspora'];
+  //   //const parts = str.split('.');
+  //   const parts = str.split(/\s+/);
+  //   return parts.some(part => keywords.some(keyword => part.toLowerCase().includes(keyword.toLowerCase())));
+  // }
+
+  // #filterElementByKeyword(json){
+  //   console.log(json);
+  //   return json.filter(item => !this.#containsKeyword(item.name) && !this.#containsKeyword(item.hostname) && !this.#containsKeyword(item.host) && !this.#containsKeyword(item.domain));
+  // }
 }
 
 export default Mapper;

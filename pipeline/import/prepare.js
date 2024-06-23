@@ -22,5 +22,4 @@ const csvFilePath = './sources/fedilist.csv';
 const csvFileHandler = new CSVFileHandler();
 csvFileHandler.input(csvFilePath);
 csvFileHandler.output('./import/input/fedilist.json')
-
 console.log(chalk.blue("Preparation finished"))
