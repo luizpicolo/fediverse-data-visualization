@@ -30,5 +30,5 @@ _map.mapAttributes = [
 _map.output('./map/output', 'BubbleChart');
 
 // Passo Final
-_render.input("../input/bubblechart.json");
+_render.input('../../map/output/bubblechart.json');
 _render.listen(3000, () => open('http://localhost:3000/'));
