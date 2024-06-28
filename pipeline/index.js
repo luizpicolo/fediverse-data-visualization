@@ -1,6 +1,8 @@
 import Import from "./import/index.js";
 import Filter from "./filter/index.js";
 import Map from "./map/index.js";
+import open from 'open';
+import _render from './render/index.js';
 
 // Primeiro passo do Pipeline
 const _import = new Import();
@@ -28,3 +30,5 @@ _map.mapAttributes = [
 _map.output('./map/output', 'BubbleChart');
 
 // Passo Final
+_render.input("../input/bubblechart.json");
+_render.listen(3000, () => open('http://localhost:3000/'));
