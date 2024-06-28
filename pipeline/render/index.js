@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.input = (pathToAdd) => { 
   console.log(chalk.blue('Prepare files to render'));
   console.log(chalk.green(' --> Copy files to input render'));
-  const filesToCopy = [ pathToAdd ];
+  const filesToCopy = [ `${pathToAdd}/bubblechart.json` ];
   new FileCopy('./render/public/input').copyFiles(filesToCopy);
   console.log(chalk.blue('Rendering...'));
 };
