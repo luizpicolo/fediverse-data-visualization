@@ -28,6 +28,7 @@ _map.mapAttributes = [
   ["domain", "stats"]
 ]
 _map.output('./map/output', 'BubbleChart');
+_map.output('./map/output', 'BarChart');
 
 // Passo Final
 _render.input('../../map/output/');
