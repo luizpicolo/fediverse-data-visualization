@@ -25,30 +25,6 @@
       "last_seen_at": "2024-07-01T14:07:57.000000Z"
     },
     {
-      "id": 17937,
-      "domain": "misskey.io",
-      "open_registration": true,
-      "description": null,
-      "banner_url": null,
-      "location": {
-        "city": null,
-        "country": "United States"
-      },
-      "software": {
-        "id": 12,
-        "name": "Misskey",
-        "url": "https://fedidb.org/software/misskey",
-        "version": "2024.5.0-io.1a"
-      },
-      "stats": {
-        "status_count": 76388677,
-        "user_count": 544877,
-        "monthly_active_users": 3070
-      },
-      "first_seen_at": "2021-03-21T07:02:57.000000Z",
-      "last_seen_at": "2024-07-01T14:07:54.000000Z"
-    },
-    {
       "id": 18033,
       "domain": "mstdn.jp",
       "open_registration": true,
@@ -191,78 +167,6 @@
       },
       "first_seen_at": "2021-03-21T07:03:05.000000Z",
       "last_seen_at": "2024-07-01T14:07:56.000000Z"
-    },
-    {
-      "id": 11856,
-      "domain": "micro.blog",
-      "open_registration": true,
-      "description": "Micro.blog is a blogging platform and social network.",
-      "banner_url": "https://fedidb.nyc3.cdn.digitaloceanspaces.com/instances/11856/ynjia32j_thumbnail.png",
-      "location": {
-        "city": null,
-        "country": null
-      },
-      "software": {
-        "id": 127,
-        "name": "Microdotblog",
-        "url": "https://fedidb.org/software/microdotblog",
-        "version": "2.1"
-      },
-      "stats": {
-        "status_count": 8172562,
-        "user_count": 169054,
-        "monthly_active_users": 4003
-      },
-      "first_seen_at": "2021-03-21T06:54:12.000000Z",
-      "last_seen_at": "2024-07-01T15:05:15.000000Z"
-    },
-    {
-      "id": 66350,
-      "domain": "lemmy.world",
-      "open_registration": true,
-      "description": null,
-      "banner_url": null,
-      "location": {
-        "city": null,
-        "country": null
-      },
-      "software": {
-        "id": 59,
-        "name": "Lemmy",
-        "url": "https://fedidb.org/software/lemmy",
-        "version": "0.19.3-3-g25987dba3"
-      },
-      "stats": {
-        "status_count": 317495,
-        "user_count": 160358,
-        "monthly_active_users": 17810
-      },
-      "first_seen_at": "2023-06-03T00:30:08.000000Z",
-      "last_seen_at": "2024-07-01T16:19:47.000000Z"
-    },
-    {
-      "id": 18006,
-      "domain": "pixelfed.social",
-      "open_registration": true,
-      "description": "The original Pixelfed instance, operated by the main developer @dansup",
-      "banner_url": "https://fedidb.nyc3.cdn.digitaloceanspaces.com/instances/18006/mfhn1mgp_thumbnail.jpg",
-      "location": {
-        "city": null,
-        "country": "United States"
-      },
-      "software": {
-        "id": 1,
-        "name": "Pixelfed",
-        "url": "https://fedidb.org/software/pixelfed",
-        "version": "0.12.3"
-      },
-      "stats": {
-        "status_count": 28035741,
-        "user_count": 116495,
-        "monthly_active_users": 9094
-      },
-      "first_seen_at": "2021-03-30T20:10:44.000000Z",
-      "last_seen_at": "2024-07-01T17:07:43.000000Z"
     },
     {
       "id": 4411,
@@ -673,30 +577,6 @@
       "last_seen_at": "2024-07-01T14:07:55.000000Z"
     },
     {
-      "id": 16999,
-      "domain": "pixelfed.de",
-      "open_registration": true,
-      "description": "A welcoming instance for all",
-      "banner_url": "https://fedidb.nyc3.cdn.digitaloceanspaces.com/instances/16999/vrgm2muq_thumbnail.jpg",
-      "location": {
-        "city": "Gunzenhausen",
-        "country": "Germany"
-      },
-      "software": {
-        "id": 1,
-        "name": "Pixelfed",
-        "url": "https://fedidb.org/software/pixelfed",
-        "version": "0.12.1"
-      },
-      "stats": {
-        "status_count": 11463594,
-        "user_count": 39864,
-        "monthly_active_users": 3992
-      },
-      "first_seen_at": "2021-03-21T07:01:31.000000Z",
-      "last_seen_at": "2024-07-01T16:07:45.000000Z"
-    },
-    {
       "id": 29966,
       "domain": "ohai.social",
       "open_registration": true,
@@ -721,30 +601,6 @@
       "last_seen_at": "2024-07-01T19:11:53.000000Z"
     },
     {
-      "id": 17775,
-      "domain": "fedibird.com",
-      "open_registration": false,
-      "description": "様々な目的に使える、日本の汎用マストドンサーバーです。安定した利用環境と、多数の独自機能を提供しています。",
-      "banner_url": "https://fedidb.nyc3.cdn.digitaloceanspaces.com/instances/17775/qkooi1re_thumbnail.jpg",
-      "location": {
-        "city": "Tokyo",
-        "country": "Japan"
-      },
-      "software": {
-        "id": 106,
-        "name": "Fedibird",
-        "url": "https://fedidb.org/software/fedibird",
-        "version": "0.1"
-      },
-      "stats": {
-        "status_count": 17695111,
-        "user_count": 38903,
-        "monthly_active_users": 10126
-      },
-      "first_seen_at": "2021-03-21T07:02:43.000000Z",
-      "last_seen_at": "2024-07-01T18:07:35.000000Z"
-    },
-    {
       "id": 17515,
       "domain": "sfba.social",
       "open_registration": true,
@@ -767,30 +623,6 @@
       },
       "first_seen_at": "2021-03-21T07:02:20.000000Z",
       "last_seen_at": "2024-07-01T18:07:28.000000Z"
-    },
-    {
-      "id": 25967,
-      "domain": "zb3.org",
-      "open_registration": true,
-      "description": null,
-      "banner_url": null,
-      "location": {
-        "city": null,
-        "country": null
-      },
-      "software": {
-        "id": 9,
-        "name": "Writefreely",
-        "url": "https://fedidb.org/software/writefreely",
-        "version": "0.13.1"
-      },
-      "stats": {
-        "status_count": 71650,
-        "user_count": 38657,
-        "monthly_active_users": null
-      },
-      "first_seen_at": "2022-08-01T04:01:10.000000Z",
-      "last_seen_at": "2024-07-01T17:10:15.000000Z"
     },
     {
       "id": 18027,
