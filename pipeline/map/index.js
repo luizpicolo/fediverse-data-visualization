@@ -100,8 +100,6 @@ class Mapper {
                   "id": `flare.mastodon.${formatDomain(node[`${attributes[0]}`])}`,
                   "value": node[`${attributes[1]}`] || 1
                 });
-<<<<<<< Updated upstream
-=======
               } 
 
               // Mapping to BarChart
@@ -110,7 +108,6 @@ class Mapper {
                   id: `${formatDomain(node[`${attributes[0]}`])}`,
                   value: parseInt(node[`${attributes[1]}`]) || 1,
                 });
->>>>>>> Stashed changes
               }
 
             });
@@ -118,12 +115,7 @@ class Mapper {
         });
       });
 
-<<<<<<< Updated upstream
-      //return this.#filterElementByKeyword(this.#removeDuplicates(mappedData));
-      return this.#removeDuplicates(mappedData)
-=======
       return this.#removeDuplicates(mappedData, chart);
->>>>>>> Stashed changes
     } catch (error) {
       console.error("Error mapping attributes:", error.message);
     }
