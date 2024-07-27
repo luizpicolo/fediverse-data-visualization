@@ -21,6 +21,16 @@ _filter.output('./filter/output');
 // Terceiro passo do Pipeline
 const _map = new Map();
 _map.input('./filter/output/filtered.json')
+_map.deleteNodes = [
+  "sleepingTown",
+  "goodNews",
+  "JoinDiaspora*",
+  "diaspOrg",
+  "pixelfedSocial",
+  "testDiaspOrg",
+  "pixelfedUno",
+  "pixelNobigtechEs",
+]
 _map.mapAttributes = [
   ["name", "users"],
   ["hostname", "user_count"],
@@ -31,4 +41,4 @@ _map.output('./map/output', 'BubbleChart');
 
 // Passo Final
 _render.input('../../map/output/');
-_render.listen(3000, () => open('http://localhost:3000/'));
+_render.listen(3000, () => ('http://localhost:3000/'));

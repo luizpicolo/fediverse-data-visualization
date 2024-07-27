@@ -6,6 +6,7 @@ import { formatDomain } from '../helpers/ClearDomain.js';
 class Mapper {
   #jsonObject;
   #attributesToMap;
+  #deleteNodes;
 
   input(path) {
     try {
@@ -53,7 +54,11 @@ class Mapper {
     this.#attributesToMap = attributes;
   }
 
-  #removeDuplicates(json) {
+  set deleteNodes(nodes) {
+    this.#deleteNodes = nodes;
+  }
+
+  #removeDuplicates(json, chart) {
     const map = new Map();
     json.forEach(item => {
         const existingItem = map.get(item.id);
@@ -62,9 +67,18 @@ class Mapper {
         }
     });
 
-    // Pedido
-    map.delete("flare.mastodon.sleepingTown");
+    this.#deleteNodes.forEach((node) => {
+      //console.log(chalk.blue(`Delete nodes ${node} to BubleChart...`));
+      if (chart.toLowerCase() == "bubblechart"){
+        map.delete(`flare.mastodon.${node}`);
+      }
 
+      //console.log(chalk.blue(`Delete nodes ${node} to BarChart...`));
+      if (chart.toLowerCase() == "barchart"){
+        map.delete(`${node}`);
+      }
+    })
+    
     return Array.from(map.values());
   }
 
@@ -86,30 +100,34 @@ class Mapper {
                   "id": `flare.mastodon.${formatDomain(node[`${attributes[0]}`])}`,
                   "value": node[`${attributes[1]}`] || 1
                 });
+<<<<<<< Updated upstream
+=======
+              } 
+
+              // Mapping to BarChart
+              if (chart.toLowerCase() == "barchart") {
+                mappedData.push({
+                  id: `${formatDomain(node[`${attributes[0]}`])}`,
+                  value: parseInt(node[`${attributes[1]}`]) || 1,
+                });
+>>>>>>> Stashed changes
               }
+
             });
           }
         });
       });
 
+<<<<<<< Updated upstream
       //return this.#filterElementByKeyword(this.#removeDuplicates(mappedData));
       return this.#removeDuplicates(mappedData)
+=======
+      return this.#removeDuplicates(mappedData, chart);
+>>>>>>> Stashed changes
     } catch (error) {
       console.error("Error mapping attributes:", error.message);
     }
   }
-
-  // #containsKeyword(str){
-  //   const keywords = ['pleroma', 'diaspora'];
-  //   //const parts = str.split('.');
-  //   const parts = str.split(/\s+/);
-  //   return parts.some(part => keywords.some(keyword => part.toLowerCase().includes(keyword.toLowerCase())));
-  // }
-
-  // #filterElementByKeyword(json){
-  //   console.log(json);
-  //   return json.filter(item => !this.#containsKeyword(item.name) && !this.#containsKeyword(item.hostname) && !this.#containsKeyword(item.host) && !this.#containsKeyword(item.domain));
-  // }
 }
 
 export default Mapper;
