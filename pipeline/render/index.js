@@ -24,8 +24,24 @@ app.input = (pathToAdd) => {
   console.log(chalk.blue('Rendering...'));
 };
 
+app.input = (pathToAdd) => { 
+  console.log(chalk.blue('Prepare files to render'));
+  console.log(chalk.green(' --> Copy files to input render'));
+  const filesToCopy = [ 
+    `${pathToAdd}/bubblechart.json`,
+    `${pathToAdd}/barchart.json` 
+  ];
+  new FileCopy('./render/public/input').copyFiles(filesToCopy);
+  console.log(chalk.blue('Rendering...'));
+};
+
+
 app.get('/', (req, res) => {
   res.render('bubble_chart');
+});
+
+app.get('/bar', (req, res) => {
+  res.render('bar_chart');
 });
 
 export default app;

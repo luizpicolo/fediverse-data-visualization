@@ -1,4 +1,4 @@
-import define from "./definition/index.js";
+import define from "./definition/bubblechart/index.js";
 import { Runtime, Inspector } from "./runtime.js";
 
 class BubbleChart {

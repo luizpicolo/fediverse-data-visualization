@@ -12,7 +12,7 @@ const rawData = fs.readFileSync('../map/output/bubblechart.json');
 const dados = JSON.parse(rawData);
 dados.sort((a, b) => a.value - b.value);
 
-console.table(dados)
+//console.table(dados)
 
 const valores = dados.map(d => d.value);
 
