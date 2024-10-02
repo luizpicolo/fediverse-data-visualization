@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bubble Chart</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        .bubble {
+            fill: steelblue;
+            stroke: black;
+            stroke-width: 1px;
+        }
+        .legend {
+            font-size: 14px;
+            fill: black;
+        }
+    </style>
+</head>
+<body>
+<svg width="960" height="600"></svg>
+<script>
+    const corte = 190000;
+    var svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
+
+    var format = d3.format(",d");
+
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    var pack = d3.pack()
+        .size([width / 2, height])
+        .padding(1.5);
+
+    d3.json("bubblechart.json").then(function(data) {
+        // Filtrar e preparar os dados
+        var leftData = data.filter(d => d.value <= corte);
+        var rightData = data.filter(d => d.value > corte);
+
+        // Calcular a soma dos valores
+        var sumLeft = d3.sum(leftData, d => d.value);
+        var sumRight = d3.sum(rightData, d => d.value);
+
+        var rootLeft = d3.hierarchy({children: leftData})
+            .sum(function(d) { return d.value; });
+
+        var rootRight = d3.hierarchy({children: rightData})
+            .sum(function(d) { return d.value; });
+
+        var nodeLeft = svg.append("g")
+            .attr("transform", `translate(${width / 4},${height / 2})`)
+            .selectAll(".node")
+            .data(pack(rootLeft).leaves())
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function(d) { return `translate(${d.x - width / 4},${d.y - height / 2})`; });
+
+        nodeLeft.append("circle")
+            .attr("class", "bubble")
+            .attr("r", function(d) { return d.r || 0; })
+            .style("fill", function(d) { return color(d.data.id); });
+
+        nodeLeft.append("title")
+            .text(function(d) { 
+                return d.data.id.replace("flare.mastodon.", "") + "\n" + format(d.data.value); 
+            });
+
+        nodeLeft.append("text")
+            .attr("dy", "0.3em")
+            .text(function(d) { 
+                // Remover o prefixo e garantir que o texto caiba na bolha
+                var text = d.data.id.replace("flare.mastodon.", "");
+                var maxLength = Math.floor(d.r / 3); // Define o comprimento máximo baseado no raio
+                return text.length > maxLength ? text.substring(0, maxLength) + "..." : text; 
+            })
+            .style("text-anchor", "middle")
+            .style("font-size", function(d) { 
+                return d.r ? d.r / 3 : "0px"; 
+            })
+            .style("fill", "#ffffff");
+
+        var nodeRight = svg.append("g")
+            .attr("transform", `translate(${(3 * width) / 4},${height / 2})`)
+            .selectAll(".node")
+            .data(pack(rootRight).leaves())
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function(d) { return `translate(${d.x - width / 4},${d.y - height / 2})`; });
+
+        nodeRight.append("circle")
+            .attr("class", "bubble")
+            .attr("r", function(d) { return d.r || 0; })
+            .style("fill", function(d) { return color(d.data.id); });
+
+        nodeRight.append("title")
+            .text(function(d) { 
+                return d.data.id.replace("flare.mastodon.", "") + "\n" + format(d.data.value); 
+            });
+
+        nodeRight.append("text")
+            .attr("dy", "0.3em")
+            .text(function(d) { 
+                // Remover o prefixo e garantir que o texto caiba na bolha
+                var text = d.data.id.replace("flare.mastodon.", "");
+                var maxLength = Math.floor(d.r / 3); // Define o comprimento máximo baseado no raio
+                return text.length > maxLength ? text.substring(0, maxLength) + "..." : text; 
+            })
+            .style("text-anchor", "middle")
+            .style("font-size", function(d) { 
+                return d.r ? d.r / 3 : "0px"; 
+            })
+            .style("fill", "#ffffff");
+
+        // Adicionar linha central
+        svg.append("line")
+            .attr("x1", width / 2)
+            .attr("x2", width / 2)
+            .attr("y1", 0)
+            .attr("y2", height)
+            .attr("stroke", "black")
+            .attr("stroke-dasharray", "4");
+
+        // Adicionar legenda
+        svg.append("text")
+            .attr("x", width / 4)
+            .attr("y", height - 40) // Ajustar a posição vertical
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px");
+            //.text("<=: " + format(leftData.length) + " nós, Total: " + format(sumLeft));
+
+        svg.append("text")
+            .attr("x", (3 * width) / 4)
+            .attr("y", height - 40) // Ajustar a posição vertical
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px");
+            //.text(">: " + format(rightData.length) + " nós, Total: " + format(sumRight));
+
+        svg.append("text")
+            .attr("x", width / 2)
+            .attr("y", 20)
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px");
+            // .text("Corte de " + format(corte) + " usuários");
+
+    }).catch(function(error) {
+        console.error('Error loading or parsing data:', error);
+    });
+
+</script>
+</body>
+</html>

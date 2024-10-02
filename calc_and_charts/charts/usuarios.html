@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Horizontal Bar Chart</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        .bar {
+            fill: steelblue;
+        }
+        .axis {
+            font-size: 12px;
+        }
+        .axis-label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .label {
+            font-size: 12px;
+            fill: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<svg width="960" height="300"></svg>
+<script>
+    const corte = 190000;
+    var svg = d3.select("svg"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height"),
+        margin = {top: 20, right: 20, bottom: 30, left: 100};
+
+    var x = d3.scaleLinear().range([0, width - margin.left - margin.right]);
+    var y = d3.scaleBand().range([height - margin.top - margin.bottom, 0]).padding(0.1);
+
+    var g = svg.append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    d3.json("bubblechart.json").then(function(data) {
+        // Filtrar e calcular
+        var leftData = data.filter(d => d.value < corte);
+        var rightData = data.filter(d => d.value >= corte);
+
+        var sumLeft = d3.sum(leftData, d => d.value);
+        var sumRight = d3.sum(rightData, d => d.value);
+        var totalSum = sumLeft + sumRight;
+
+        var combinedData = [
+            {id: 'Menores que o Corte', value: sumLeft},
+            {id: 'Maiores ou iguais ao Corte', value: sumRight},
+            {id: 'Total', value: totalSum}
+        ];
+
+        // Definir domínios para escalas
+        x.domain([0, d3.max(combinedData, d => d.value)]);
+        y.domain(combinedData.map(d => d.id));
+
+        // Adicionar eixos
+        g.append("g")
+            .attr("class", "x-axis")
+            .attr("transform", `translate(0,${height - margin.top - margin.bottom})`)
+            .call(d3.axisBottom(x).tickFormat(d3.format(",d")));
+
+        g.append("g")
+            .attr("class", "y-axis")
+            .call(d3.axisLeft(y).tickSize(0));
+
+        // Adicionar barras
+        g.selectAll(".bar")
+            .data(combinedData)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("y", d => y(d.id))
+            .attr("width", d => x(d.value))
+            .attr("height", y.bandwidth());
+
+        // Adicionar rótulos nas barras
+        g.selectAll(".label")
+            .data(combinedData)
+            .enter().append("text")
+            .attr("class", "label")
+            .attr("y", d => y(d.id) + y.bandwidth() / 2)
+            .attr("x", d => x(d.value) + 5)
+            .attr("dy", ".35em")
+            .text(d => d3.format(",d")(d.value));
+
+        // Adicionar título
+        svg.append("text")
+            .attr("x", width / 2)
+            .attr("y", margin.top / 2)
+            .attr("text-anchor", "middle")
+            .attr("class", "axis-label")
+            .text("Gráfico de Barras Horizontais");
+    }).catch(function(error) {
+        console.error('Error loading or parsing data:', error);
+    });
+</script>
+</body>
+</html>
